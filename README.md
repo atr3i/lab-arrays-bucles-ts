@@ -1,11 +1,9 @@
-# typescript-sandbox
+# Laboratorio Módulo 8.1 - Bucles
 
-Para la parte de cada módulo en la que te planteamos ejercicios con JavaScript puedes usar este sandbox.
+Implementado:
 
-Pasos:
-
-- Clonate el proyecto.
-- Instala las dependencias con `npm install`.
-- Ejecuta el sandbox con `npm run dev`.
-- Abre el navegador en `http://localhost:5173/` (si ese puerto no te funciona, mira en la consola donde has hecho el build, puede que este ocupado y se haya abierto en otro puerto).
-- Puedes empezar a meter tu código en el fichero:
+- Apartado 1. Obtener pacientes asignados a Pediatría y asignados a Pediatría menores de 10 años
+- Apartado 2. Activar protocolo de Urgencia
+- Apartado 3. Reasignar pacientes a Médico de Familia
+- Apartado 4. Comprobar si hay pacientes de Pediatría
+- Apartado 5. Obtener pacientes por especialidad

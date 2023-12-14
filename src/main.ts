@@ -47,7 +47,7 @@ const pacientes: Pacientes[] = [
         nombre: "Mary",
         apellidos: "Wien",
         sexo: "Female",
-        temperatura: 36.8,
+        temperatura: 39.5,
         frecuenciaCardiaca: 120,
         especialidad: "Medico de familia",
         edad: 20,
@@ -74,18 +74,21 @@ const pacientes: Pacientes[] = [
     },
 ];
 
+
+/*
+Apartado 1. Obtener pacientes asignados a Pediatría y asignados a Pediatría menores de 10 años
+*/ 
 const obtenPacientesAsignadosAPediatria = (pacientes: Pacientes[]): Pacientes[] => {
-    // Tu implementación aquí :)
+
     let nuevoPacientes: Pacientes[] = [];
     for (let i = 0; i < pacientes.length; i++) {
         if (pacientes[i].especialidad === "Pediatra") nuevoPacientes = [...nuevoPacientes, pacientes[i]];
     }
     return nuevoPacientes;
 };
-console.log(obtenPacientesAsignadosAPediatria(pacientes));
+console.log("Pacientes asignados a Pediatría: ", obtenPacientesAsignadosAPediatria(pacientes));
 
 const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (pacientes: Pacientes[]): Pacientes[] => {
-    // Tu implementación aquí :)
     let nuevoPacientes: Pacientes[] = [];
     for (let i = 0; i < pacientes.length; i++) {
         if (pacientes[i].especialidad === "Pediatra" && pacientes[i].edad < 10) nuevoPacientes = [...nuevoPacientes, pacientes[i]];
@@ -93,7 +96,103 @@ const obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios = (pacientes: Pacientes
     return nuevoPacientes;
 };
 
-console.log(obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios(pacientes));
+console.log("Pacientes asignados a Pediatría menores de 10 años: ", obtenPacientesAsignadosAPediatriaYMenorDeDiezAnios(pacientes));
+
+
+/*
+Apartado 2. Activar protocolo de Urgencia
+*/ 
+const activarProtocoloUrgencia = (pacientes: Pacientes[]): boolean => {
+    let activarProtocolo = false;
+
+    for (let i = 0; i < pacientes.length; i++) {
+        if (pacientes[i].frecuenciaCardiaca > 100 && pacientes[i].temperatura > 39) activarProtocolo = true;
+    }
+    return activarProtocolo;
+};
+
+console.log(`Aplicar protocolo urgencia: `, activarProtocoloUrgencia(pacientes));
+
+
+/*
+Apartado 3. Reasignar pacientes a Médico de Familia
+*/ 
+const reasignaPacientesAMedicoFamilia = <T extends Pacientes>(pacientes: T[]): T[] => {
+    let reasignarEspecialidad: T[] = [];
+    for (let i = 0; i < pacientes.length; i++) {
+        if (pacientes[i].especialidad === "Pediatra") {
+            const nuevaEspecialidad = {
+                ...pacientes[i],
+                especialidad: "Medico de familia"
+            }
+            reasignarEspecialidad = [...reasignarEspecialidad, nuevaEspecialidad];
+        }
+    }
+    return reasignarEspecialidad;
+};
+
+console.log("Reasignar pacientes a Médico de Familia: ", reasignaPacientesAMedicoFamilia(pacientes));
+
+
+/*
+Apartado 4. Comprobar si hay pacientes de Pediatría
+*/ 
+const HayPacientesDePediatria = (pacientes: Pacientes[]): boolean => {
+    let noHayPacientes = false;
+    for (let i = 0; i < pacientes.length; i++) {
+        (pacientes[i].especialidad === "Pediatra") ? noHayPacientes = true : noHayPacientes = false;
+    }
+    return noHayPacientes;
+};
+console.log("Comprobar si hay pacientes de Pediatría: ", HayPacientesDePediatria(pacientes));
+
+
+/*
+Apartado 5. Obtener pacientes por especialidad
+*/ 
+interface NumeroPacientesPorEspecialidad {
+    medicoDeFamilia: number;
+    pediatria: number;
+    cardiologia: number;
+}
+
+const numeroPacientesPorEspecialidad: NumeroPacientesPorEspecialidad[] = [{
+    medicoDeFamilia: 0,
+    pediatria: 0,
+    cardiologia: 0
+}];
+
+const cuentaPacientesPorEspecialidad = (pacientes: Pacientes[]): NumeroPacientesPorEspecialidad[] => {
+    let pacientesEspecialidad: NumeroPacientesPorEspecialidad[] = [];
+
+    const listaPacientes = (especialidad: string): number => {
+        let numero: number = 0;
+        for (let i = 0; i < pacientes.length; i++) {
+            if (pacientes[i].especialidad === especialidad) {
+                numero++;
+            }
+        }
+        return numero;
+    };
+
+    pacientesEspecialidad = [{
+        medicoDeFamilia: listaPacientes("Medico de familia"),
+        pediatria: listaPacientes("Pediatra"),
+        cardiologia: listaPacientes("Cardiólogo")
+    }];
+
+   
+    return pacientesEspecialidad;
+
+};
+
+console.log("Obtener número de pacientes por especialidad: ", cuentaPacientesPorEspecialidad(pacientes));
+
+
+
+
+
+
 
 
 // TIPOS GENÉRICOS II
